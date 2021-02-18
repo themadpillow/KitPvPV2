@@ -3,6 +3,7 @@ package mb.mizinkobusters.kitpvp;
 import mb.mizinkobusters.kitpvp.gui.KitMenu;
 import mb.mizinkobusters.kitpvp.gui.KitPurchaseMenu;
 import mb.mizinkobusters.kitpvp.listener.PlayerDeathListener;
+import mb.mizinkobusters.kitpvp.listener.PlayerRespawnListener;
 import mb.mizinkobusters.kitpvp.utils.KitPvPUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -17,6 +18,7 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new KitPurchaseMenu(), this);
 
         Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(), this);
+        Bukkit.getPluginManager().registerEvents(new PlayerRespawnListener(this), this);
 
         Bukkit.getPluginManager().registerEvents(new KitPvPUtils(), this);
 
