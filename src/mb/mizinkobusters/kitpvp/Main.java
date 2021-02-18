@@ -2,6 +2,7 @@ package mb.mizinkobusters.kitpvp;
 
 import mb.mizinkobusters.kitpvp.gui.KitMenu;
 import mb.mizinkobusters.kitpvp.gui.KitPurchaseMenu;
+import mb.mizinkobusters.kitpvp.utils.KitPvPUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -13,6 +14,8 @@ public class Main extends JavaPlugin implements Listener {
     public void onEnable() {
         Bukkit.getPluginManager().registerEvents(new KitMenu(), this);
         Bukkit.getPluginManager().registerEvents(new KitPurchaseMenu(), this);
+
+        Bukkit.getPluginManager().registerEvents(new KitPvPUtils(), this);
 
         String name = this.getDescription().getName();
         String ver = this.getDescription().getVersion();
