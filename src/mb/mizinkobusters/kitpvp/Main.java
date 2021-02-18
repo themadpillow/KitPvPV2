@@ -7,6 +7,7 @@ import mb.mizinkobusters.kitpvp.listener.PlayerRespawnListener;
 import mb.mizinkobusters.kitpvp.listener.VoidWalkingListener;
 import mb.mizinkobusters.kitpvp.other.ArrowsRemover;
 import mb.mizinkobusters.kitpvp.other.FieldSender;
+import mb.mizinkobusters.kitpvp.other.MatchResultAnnounce;
 import mb.mizinkobusters.kitpvp.utils.KitPvPUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.event.Listener;
@@ -26,6 +27,7 @@ public class Main extends JavaPlugin implements Listener {
 
         Bukkit.getPluginManager().registerEvents(new ArrowsRemover(), this);
         Bukkit.getPluginManager().registerEvents(new FieldSender(), this);
+        Bukkit.getPluginManager().registerEvents(new MatchResultAnnounce(), this);
 
         Bukkit.getPluginManager().registerEvents(new KitPvPUtils(), this);
 
