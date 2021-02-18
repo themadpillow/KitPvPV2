@@ -2,6 +2,7 @@ package mb.mizinkobusters.kitpvp;
 
 import mb.mizinkobusters.kitpvp.gui.KitMenu;
 import mb.mizinkobusters.kitpvp.gui.KitPurchaseMenu;
+import mb.mizinkobusters.kitpvp.kit.*;
 import mb.mizinkobusters.kitpvp.listener.PlayerDeathListener;
 import mb.mizinkobusters.kitpvp.listener.PlayerRespawnListener;
 import mb.mizinkobusters.kitpvp.listener.VoidWalkingListener;
@@ -24,6 +25,25 @@ public class Main extends JavaPlugin implements Listener {
         Bukkit.getPluginManager().registerEvents(new PlayerDeathListener(), this);
         Bukkit.getPluginManager().registerEvents(new PlayerRespawnListener(this), this);
         Bukkit.getPluginManager().registerEvents(new VoidWalkingListener(), this);
+
+        Bukkit.getPluginManager().registerEvents(new Archer(), this);
+        Bukkit.getPluginManager().registerEvents(new Astronaut(), this);
+        Bukkit.getPluginManager().registerEvents(new Berserker(), this);
+        Bukkit.getPluginManager().registerEvents(new Blizzard(), this);
+        Bukkit.getPluginManager().registerEvents(new Boxer(), this);
+        Bukkit.getPluginManager().registerEvents(new Comet(), this);
+        Bukkit.getPluginManager().registerEvents(new Counter(), this);
+        Bukkit.getPluginManager().registerEvents(new Fighter(), this);
+        Bukkit.getPluginManager().registerEvents(new Fisherman(), this);
+        Bukkit.getPluginManager().registerEvents(new Flame(), this);
+        Bukkit.getPluginManager().registerEvents(new HealthBoost(), this);
+        Bukkit.getPluginManager().registerEvents(new PotionHandler(), this);
+        Bukkit.getPluginManager().registerEvents(new Rabbit(), this);
+        Bukkit.getPluginManager().registerEvents(new Revive(), this);
+        Bukkit.getPluginManager().registerEvents(new Sniper(), this);
+        Bukkit.getPluginManager().registerEvents(new Standard(), this);
+        Bukkit.getPluginManager().registerEvents(new Tank(), this);
+        Bukkit.getPluginManager().registerEvents(new Thunder(), this);
 
         Bukkit.getPluginManager().registerEvents(new ArrowsRemover(), this);
         Bukkit.getPluginManager().registerEvents(new FieldSender(), this);
