@@ -5,6 +5,24 @@ import amata1219.niflheimr.dsl.InventoryUI
 import amata1219.niflheimr.dsl.component.Icon
 import amata1219.niflheimr.dsl.component.format.InventoryLines
 import amata1219.niflheimr.dsl.component.slot.Slot
+import mb.mizinkobusters.kitpvp.kit.Archer
+import mb.mizinkobusters.kitpvp.kit.Astronaut
+import mb.mizinkobusters.kitpvp.kit.Berserker
+import mb.mizinkobusters.kitpvp.kit.Blizzard
+import mb.mizinkobusters.kitpvp.kit.Boxer
+import mb.mizinkobusters.kitpvp.kit.Comet
+import mb.mizinkobusters.kitpvp.kit.Counter
+import mb.mizinkobusters.kitpvp.kit.Fighter
+import mb.mizinkobusters.kitpvp.kit.Fisherman
+import mb.mizinkobusters.kitpvp.kit.Flame
+import mb.mizinkobusters.kitpvp.kit.HealthBoost
+import mb.mizinkobusters.kitpvp.kit.PotionHandler
+import mb.mizinkobusters.kitpvp.kit.Rabbit
+import mb.mizinkobusters.kitpvp.kit.Revive
+import mb.mizinkobusters.kitpvp.kit.Sniper
+import mb.mizinkobusters.kitpvp.kit.Standard
+import mb.mizinkobusters.kitpvp.kit.Tank
+import mb.mizinkobusters.kitpvp.kit.Thunder
 import mb.mizinkobusters.kitpvp.other.ArmorGiver
 import mb.mizinkobusters.kitpvp.utils.KitPvPUtils
 import org.bukkit.Color
@@ -83,7 +101,7 @@ class KitMenu : InventoryUI, Listener {
                     viewer.inventory.addItem(bow)
                     viewer.inventory.addItem(ItemStack(Material.ARROW))
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE))
-                    KitPvPUtils.setKit(viewer, "Archer")
+                    KitPvPUtils.setKit(viewer, Archer)
                     viewer.sendMessage("$prefix§aArcher Kitを選択しました")
                 }
             }, 0)
@@ -117,7 +135,7 @@ class KitMenu : InventoryUI, Listener {
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE, 2))
                     viewer.addPotionEffect(PotionEffect(PotionEffectType.JUMP, 1000000, 2, false, false))
                     viewer.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 1000000, 1, false, false))
-                    KitPvPUtils.setKit(viewer, "Astronaut")
+                    KitPvPUtils.setKit(viewer, Astronaut)
                     viewer.sendMessage("$prefix§aAstronaut Kitを選択しました")
                 }
             }, 1)
@@ -155,7 +173,7 @@ class KitMenu : InventoryUI, Listener {
                     ).equip()
                     viewer.inventory.addItem(ItemStack(Material.IRON_SWORD))
                     viewer.addPotionEffect(PotionEffect(PotionEffectType.WEAKNESS, 1000000, 0, false, false))
-                    KitPvPUtils.setKit(viewer, "Berserker")
+                    KitPvPUtils.setKit(viewer, Berserker)
                     viewer.sendMessage("$prefix§aBerserker Kitを選択しました")
                 }
             }, 2)
@@ -185,7 +203,7 @@ class KitMenu : InventoryUI, Listener {
                     ).equip()
                     viewer.inventory.addItem(ItemStack(Material.IRON_SWORD))
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE))
-                    KitPvPUtils.setKit(viewer, "Blizzard")
+                    KitPvPUtils.setKit(viewer, Blizzard)
                     viewer.sendMessage("$prefix§aBlizzard Kitを選択しました")
                 }
             }, 3)
@@ -211,7 +229,7 @@ class KitMenu : InventoryUI, Listener {
                     sword.addEnchantment(Enchantment.DAMAGE_ALL, 5)
                     viewer.inventory.addItem(sword)
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE, 2))
-                    KitPvPUtils.setKit(viewer, "Boxer")
+                    KitPvPUtils.setKit(viewer, Boxer)
                     viewer.sendMessage("$prefix§aBoxer Kitを選択しました")
                 }
             }, 4)
@@ -257,7 +275,7 @@ class KitMenu : InventoryUI, Listener {
                     viewer.inventory.addItem(ItemStack(Material.DIAMOND_SWORD))
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE, 2))
                     viewer.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 1000000, 2, false, false))
-                    KitPvPUtils.setKit(viewer, "Comet")
+                    KitPvPUtils.setKit(viewer, Comet)
                     viewer.sendMessage("$prefix§aComet Kitを選択しました")
                 }
             }, 5)
@@ -288,7 +306,7 @@ class KitMenu : InventoryUI, Listener {
                     ).equip()
                     viewer.inventory.addItem(ItemStack(Material.STONE_SWORD))
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE))
-                    KitPvPUtils.setKit(viewer, "Counter")
+                    KitPvPUtils.setKit(viewer, Counter)
                     viewer.sendMessage("$prefix§aCounter Kitを選択しました")
                 }
             }, 6)
@@ -319,7 +337,7 @@ class KitMenu : InventoryUI, Listener {
                     viewer.inventory.addItem(ItemStack(Material.IRON_SWORD))
                     viewer.inventory.addItem(ItemStack(Material.FISHING_ROD))
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE))
-                    KitPvPUtils.setKit(viewer, "Fighter")
+                    KitPvPUtils.setKit(viewer, Fighter)
                     viewer.sendMessage("$prefix§aFighter Kitを選択しました")
                 }
             }, 7)
@@ -351,7 +369,7 @@ class KitMenu : InventoryUI, Listener {
                     viewer.inventory.addItem(ItemStack(Material.IRON_SWORD))
                     viewer.inventory.addItem(ItemStack(Material.FISHING_ROD))
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE))
-                    KitPvPUtils.setKit(viewer, "Fisherman")
+                    KitPvPUtils.setKit(viewer, Fisherman)
                     viewer.sendMessage("$prefix§aFisherman Kitを選択しました")
                 }
             }, 8)
@@ -390,7 +408,7 @@ class KitMenu : InventoryUI, Listener {
                     viewer.inventory.addItem(ItemStack(Material.ARROW, 10))
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE))
                     viewer.addPotionEffect(PotionEffect(PotionEffectType.FIRE_RESISTANCE, 1000000, 2, false, false))
-                    KitPvPUtils.setKit(viewer, "Flame")
+                    KitPvPUtils.setKit(viewer, Flame)
                     viewer.sendMessage("$prefix§aFlame Kitを選択しました")
                 }
             }, 9)
@@ -422,7 +440,7 @@ class KitMenu : InventoryUI, Listener {
                     ).equip()
                     viewer.inventory.addItem(ItemStack(Material.IRON_SWORD))
                     viewer.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.baseValue = 18.0
-                    KitPvPUtils.setKit(viewer, "HealthBoost")
+                    KitPvPUtils.setKit(viewer, HealthBoost)
                     viewer.sendMessage("$prefix§aHealthBoost Kitを選択しました")
                 }
             }, 10)
@@ -462,7 +480,7 @@ class KitMenu : InventoryUI, Listener {
                     viewer.inventory.addItem(ItemStack(Material.POTION, 2, 16389.toShort()))
                     viewer.inventory.addItem(ItemStack(Material.POTION, 2, 16396.toShort()))
                     viewer.inventory.addItem(ItemStack(Material.POTION, 2, 16388.toShort()))
-                    KitPvPUtils.setKit(viewer, "PotionHandler")
+                    KitPvPUtils.setKit(viewer, PotionHandler)
                     viewer.sendMessage("$prefix§aPotionHandler Kitを選択しました")
                 }
             }, 11)
@@ -495,7 +513,7 @@ class KitMenu : InventoryUI, Listener {
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE))
                     viewer.addPotionEffect(PotionEffect(PotionEffectType.JUMP, 1000000, 1, false, false))
                     viewer.addPotionEffect(PotionEffect(PotionEffectType.SPEED, 1000000, 1, false, false))
-                    KitPvPUtils.setKit(viewer, "Rabbit")
+                    KitPvPUtils.setKit(viewer, Rabbit)
                     viewer.sendMessage("$prefix§aRabbit Kitを選択しました")
                 }
             }, 12)
@@ -531,7 +549,7 @@ class KitMenu : InventoryUI, Listener {
                         Material.DIAMOND_BOOTS
                     ).equip()
                     viewer.inventory.addItem(ItemStack(Material.IRON_SWORD))
-                    KitPvPUtils.setKit(viewer, "Revive")
+                    KitPvPUtils.setKit(viewer, Revive)
                     viewer.sendMessage("$prefix§aRevive Kitを選択しました")
                 }
             }, 13)
@@ -571,7 +589,7 @@ class KitMenu : InventoryUI, Listener {
                     viewer.inventory.addItem(bow)
                     viewer.inventory.addItem(ItemStack(Material.ARROW))
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE))
-                    KitPvPUtils.setKit(viewer, "Sniper")
+                    KitPvPUtils.setKit(viewer, Sniper)
                     viewer.sendMessage("$prefix§aSniper Kitを選択しました")
                 }
             }, 14)
@@ -601,7 +619,7 @@ class KitMenu : InventoryUI, Listener {
                     ).equip()
                     viewer.inventory.addItem(ItemStack(Material.IRON_SWORD))
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE))
-                    KitPvPUtils.setKit(viewer, "Standard")
+                    KitPvPUtils.setKit(viewer, Standard)
                     viewer.sendMessage("$prefix§aStandard Kitを選択しました")
                 }
             }, 15)
@@ -634,7 +652,7 @@ class KitMenu : InventoryUI, Listener {
                     viewer.inventory.addItem(sword)
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE, 2))
                     viewer.addPotionEffect(PotionEffect(PotionEffectType.SLOW, 1000000, 0, false, false))
-                    KitPvPUtils.setKit(viewer, "Tank")
+                    KitPvPUtils.setKit(viewer, Tank)
                     viewer.sendMessage("$prefix§aTank Kitを選択しました")
                 }
             }, 16)
@@ -666,7 +684,7 @@ class KitMenu : InventoryUI, Listener {
                     sword.addEnchantment(Enchantment.DAMAGE_ALL, 2)
                     viewer.inventory.addItem(sword)
                     viewer.inventory.addItem(ItemStack(Material.GOLDEN_APPLE, 2))
-                    KitPvPUtils.setKit(viewer, "Thunder")
+                    KitPvPUtils.setKit(viewer, Thunder)
                     viewer.sendMessage("$prefix§aThunder Kitを選択しました")
                 }
             }, 17)
