@@ -1,86 +1,33 @@
 package mb.mizinkobusters.kitpvp.gui
 
-import amata1219.niflheimr.dsl.InventoryUI
-import org.bukkit.event.EventPriority
-import org.bukkit.event.inventory.InventoryClickEvent
-import org.bukkit.entity.Player
-import org.bukkit.inventory.ItemStack
 import amata1219.niflheimr.dsl.InventoryLayout
+import amata1219.niflheimr.dsl.InventoryUI
 import amata1219.niflheimr.dsl.component.Icon
 import amata1219.niflheimr.dsl.component.format.InventoryLines
 import amata1219.niflheimr.dsl.component.slot.Slot
-import org.bukkit.Material
-import amata1219.niflheimr.event.InventoryUIClickEvent
 import mb.mizinkobusters.kitpvp.other.ArmorGiver
-import org.bukkit.enchantments.Enchantment
 import mb.mizinkobusters.kitpvp.utils.KitPvPUtils
-import org.bukkit.potion.PotionEffect
-import org.bukkit.potion.PotionEffectType
+import org.bukkit.Color
+import org.bukkit.Material
+import org.bukkit.attribute.Attribute
+import org.bukkit.enchantments.Enchantment
+import org.bukkit.entity.Player
+import org.bukkit.event.EventHandler
+import org.bukkit.event.EventPriority
+import org.bukkit.event.Listener
+import org.bukkit.event.inventory.InventoryClickEvent
+import org.bukkit.event.player.PlayerInteractEvent
+import org.bukkit.inventory.ItemStack
+import org.bukkit.inventory.meta.LeatherArmorMeta
 import org.bukkit.inventory.meta.PotionMeta
 import org.bukkit.potion.PotionData
+import org.bukkit.potion.PotionEffect
+import org.bukkit.potion.PotionEffectType
 import org.bukkit.potion.PotionType
-import org.bukkit.inventory.meta.LeatherArmorMeta
-import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerRespawnEvent
-import mb.mizinkobusters.kitpvp.utils.PlayerSalvationUtils
-import org.bukkit.event.entity.EntityDamageByEntityEvent
-import org.bukkit.entity.EntityType
-import org.bukkit.entity.Arrow
-import org.bukkit.Sound
-import org.bukkit.event.player.PlayerItemConsumeEvent
-import org.bukkit.event.entity.EntityDamageEvent
-import org.bukkit.event.player.PlayerFishEvent
-import org.bukkit.World
-import org.bukkit.Bukkit
-import org.bukkit.inventory.PlayerInventory
-import org.bukkit.event.player.PlayerTeleportEvent
-import org.bukkit.event.entity.ProjectileHitEvent
-import org.bukkit.entity.Projectile
-import java.io.File
-import java.math.BigDecimal
-import org.bukkit.configuration.file.FileConfiguration
-import org.bukkit.configuration.file.YamlConfiguration
-import org.bukkit.event.entity.EntityDamageEvent.DamageCause
-import java.util.HashMap
-import java.util.UUID
-import org.bukkit.event.entity.PlayerDeathEvent
-import org.bukkit.event.player.PlayerMoveEvent
-import org.bukkit.block.BlockFace
-import org.bukkit.plugin.java.JavaPlugin
-import org.bukkit.event.player.PlayerToggleSneakEvent
-import org.bukkit.metadata.FixedMetadataValue
-import org.bukkit.scheduler.BukkitRunnable
-import mb.mizinkobusters.kitpvp.gui.KitMenu
-import mb.mizinkobusters.kitpvp.gui.KitPurchaseMenu
-import mb.mizinkobusters.kitpvp.listener.PlayerDeathListener
-import mb.mizinkobusters.kitpvp.listener.PlayerRespawnListener
-import mb.mizinkobusters.kitpvp.listener.VoidWalkingListener
-import mb.mizinkobusters.kitpvp.kit.Archer
-import mb.mizinkobusters.kitpvp.kit.Astronaut
-import mb.mizinkobusters.kitpvp.kit.Berserker
-import mb.mizinkobusters.kitpvp.kit.Blizzard
-import mb.mizinkobusters.kitpvp.kit.Boxer
-import mb.mizinkobusters.kitpvp.kit.Comet
-import mb.mizinkobusters.kitpvp.kit.Fighter
-import mb.mizinkobusters.kitpvp.kit.Fisherman
-import mb.mizinkobusters.kitpvp.kit.Flame
-import mb.mizinkobusters.kitpvp.kit.HealthBoost
-import mb.mizinkobusters.kitpvp.kit.PotionHandler
-import mb.mizinkobusters.kitpvp.kit.Revive
-import mb.mizinkobusters.kitpvp.kit.Sniper
-import mb.mizinkobusters.kitpvp.kit.Standard
-import mb.mizinkobusters.kitpvp.kit.Tank
-import mb.mizinkobusters.kitpvp.kit.Thunder
-import mb.mizinkobusters.kitpvp.other.ArrowsRemover
-import mb.mizinkobusters.kitpvp.other.FieldSender
-import mb.mizinkobusters.kitpvp.other.MatchResultAnnounce
-import org.bukkit.Color
-import org.bukkit.attribute.Attribute
-import org.bukkit.event.EventHandler
-import org.bukkit.event.Listener
 
 class KitMenu : InventoryUI, Listener {
     private val prefix = "§f[§dKitPvP§f] "
+
     @EventHandler(priority = EventPriority.LOWEST)
     fun optimizeInventory(event: InventoryClickEvent) {
         val player = event.whoClicked as Player
@@ -97,7 +44,7 @@ class KitMenu : InventoryUI, Listener {
         if (item.itemMeta!!.displayName.endsWith("を選択する")) {
             player.inventory.clear()
             for (armor in player.inventory.armorContents) {
-                armor?.setType(null)
+                armor?.type = null
             }
             player.closeInventory()
         }
@@ -123,7 +70,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.BOW
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.LEATHER_HELMET,
@@ -158,7 +105,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.GLASS
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.GLASS,
@@ -198,7 +145,7 @@ class KitMenu : InventoryUI, Listener {
                         item.itemMeta = meta
                     }
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.IRON_HELMET,
@@ -228,7 +175,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.ICE
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.DIAMOND_HELMET,
@@ -258,7 +205,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.LEATHER_LEGGINGS
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(viewer, Material.AIR, Material.AIR, Material.LEATHER_LEGGINGS, Material.AIR).equip()
                     val sword = ItemStack(Material.DIAMOND_SWORD)
                     sword.addEnchantment(Enchantment.DAMAGE_ALL, 5)
@@ -284,22 +231,22 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.DIAMOND_BOOTS
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     var armormeta: LeatherArmorMeta?
                     val helmet = ItemStack(Material.LEATHER_HELMET)
                     helmet.addEnchantment(Enchantment.DURABILITY, 1)
                     armormeta = helmet.itemMeta as LeatherArmorMeta?
-                    armormeta!!.setColor(Color.AQUA)
+                    armormeta!!.color = Color.AQUA
                     helmet.itemMeta = armormeta
                     val chest = ItemStack(Material.LEATHER_CHESTPLATE)
                     helmet.addEnchantment(Enchantment.DURABILITY, 1)
                     armormeta = helmet.itemMeta as LeatherArmorMeta?
-                    armormeta!!.setColor(Color.AQUA)
+                    armormeta!!.color = Color.AQUA
                     chest.itemMeta = armormeta
                     val leg = ItemStack(Material.LEATHER_LEGGINGS)
                     helmet.addEnchantment(Enchantment.DURABILITY, 1)
                     armormeta = helmet.itemMeta as LeatherArmorMeta?
-                    armormeta!!.setColor(Color.AQUA)
+                    armormeta!!.color = Color.AQUA
                     leg.itemMeta = armormeta
                     val boots = ItemStack(Material.DIAMOND_BOOTS)
                     boots.addEnchantment(Enchantment.DURABILITY, 1)
@@ -331,7 +278,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.DIAMOND_CHESTPLATE
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.IRON_HELMET,
@@ -361,7 +308,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.FISHING_ROD
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.IRON_HELMET,
@@ -393,7 +340,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.RAW_FISH
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.LEATHER_HELMET,
@@ -426,7 +373,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.BLAZE_POWDER
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.IRON_HELMET,
@@ -465,7 +412,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.GOLDEN_APPLE
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.IRON_HELMET,
@@ -503,7 +450,7 @@ class KitMenu : InventoryUI, Listener {
                         item.itemMeta = meta
                     }
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.CHAINMAIL_HELMET,
@@ -536,7 +483,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.RABBIT_FOOT
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.IRON_HELMET,
@@ -575,7 +522,7 @@ class KitMenu : InventoryUI, Listener {
                         item.itemMeta = meta
                     }
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.IRON_HELMET,
@@ -610,7 +557,7 @@ class KitMenu : InventoryUI, Listener {
                     i.basedItemStack = ItemStack(Material.LONG_GRASS)
                     i.damage = 1
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.CHAINMAIL_HELMET,
@@ -644,7 +591,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.IRON_SWORD
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.IRON_HELMET,
@@ -674,7 +621,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.ANVIL
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.DIAMOND_HELMET,
@@ -707,7 +654,7 @@ class KitMenu : InventoryUI, Listener {
                     )
                     i.material = Material.DOUBLE_PLANT
                 }
-                s.onClick { e: InventoryUIClickEvent? ->
+                s.onClick {
                     ArmorGiver(
                         viewer,
                         Material.IRON_HELMET,
