@@ -1,27 +1,18 @@
 package mb.mizinkobusters.kitpvp.kit
 
-import mb.mizinkobusters.kitpvp.utils.KitPvPUtils
 import org.bukkit.attribute.Attribute
-import org.bukkit.event.EventHandler
-import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerRespawnEvent
+import org.bukkit.event.entity.PlayerDeathEvent
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-class Berserker : Listener {
-    @EventHandler
-    fun onKill(event: PlayerRespawnEvent) {
-        val player = event.player
-        if (player.killer == null) {
-            return
-        }
+object Berserker : BaseKit {
+    override val isHealOnKill = false
+
+    override fun onKill(event: PlayerDeathEvent) {
+        super.onKill(event)
+
+        val player = event.entity
         val killer = player.killer
-        if (!KitPvPUtils.isInWorld(killer)) {
-            return
-        }
-        if (KitPvPUtils.getKit(killer) != "Berserker") {
-            return
-        }
         if (player.hasPotionEffect(PotionEffectType.WEAKNESS)) {
             player.removePotionEffect(PotionEffectType.WEAKNESS)
         }

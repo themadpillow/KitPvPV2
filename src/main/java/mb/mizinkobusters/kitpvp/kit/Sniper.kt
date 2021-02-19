@@ -1,54 +1,21 @@
 package mb.mizinkobusters.kitpvp.kit
 
 import kotlin.math.abs
-import mb.mizinkobusters.kitpvp.utils.KitPvPUtils
-import org.bukkit.Material
-import org.bukkit.attribute.Attribute
 import org.bukkit.entity.Arrow
-import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
-import org.bukkit.event.EventHandler
-import org.bukkit.event.Listener
 import org.bukkit.event.entity.EntityDamageByEntityEvent
-import org.bukkit.event.player.PlayerRespawnEvent
-import org.bukkit.inventory.ItemStack
 
-class Sniper : Listener {
-    @EventHandler
-    fun onKill(event: PlayerRespawnEvent) {
-        val player = event.player
-        if (player.killer == null) {
-            return
-        }
-        val killer = player.killer
-        if (!KitPvPUtils.isInWorld(killer)) {
-            return
-        }
-        if (KitPvPUtils.getKit(killer) != "Sniper") {
-            return
-        }
-        killer!!.inventory.addItem(ItemStack(Material.GOLDEN_APPLE))
-        killer.health = killer.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
-    }
+object Sniper : BaseKit {
+    override fun onDamageByEntity(event: EntityDamageByEntityEvent) {
+        super.onDamageByEntity(event)
 
-    @EventHandler
-    fun onDamage(event: EntityDamageByEntityEvent) {
-        if (event.entity.type != EntityType.PLAYER) {
-            return
-        }
-        val damagee = event.entity as Player
-        if (!KitPvPUtils.isInWorld(damagee)) {
-            return
-        }
-        if (event.damager.type != EntityType.ARROW) {
-            return
-        }
-        val arrow = event.damager as Arrow
-        val shooter = arrow.shooter as Player?
-        if (KitPvPUtils.getKit(shooter) != "Sniper") {
-            return
-        }
-        val distance = shooter!!.location.distance(damagee.location)
+        val arrow = event.damager
+        if (arrow !is Arrow) return
+
+        val shooter = arrow.shooter
+        if (shooter !is Player) return
+
+        val distance = shooter.location.distance(event.entity.location)
         val damage = event.damage
         if (abs(distance) < 10) {
             if (damage <= 2) {

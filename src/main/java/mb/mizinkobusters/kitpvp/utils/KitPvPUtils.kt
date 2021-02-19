@@ -2,6 +2,7 @@ package mb.mizinkobusters.kitpvp.utils
 
 import java.util.HashMap
 import java.util.UUID
+import mb.mizinkobusters.kitpvp.kit.BaseKit
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
@@ -9,27 +10,27 @@ import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
 
 object KitPvPUtils : Listener {
-    var kit = HashMap<UUID, String?>()
-    private var streak = HashMap<UUID, Int>()
-    fun getKit(player: Player?): String? {
-        return if (kit.getOrDefault(player!!.uniqueId, "none") != null) {
-            kit.getOrDefault(player.uniqueId, "none")
-        } else "none"
+    private val kitMap = HashMap<UUID, BaseKit>()
+    private val streak = HashMap<UUID, Int>()
+
+    fun getKit(player: Player): BaseKit? {
+        return kitMap[player.uniqueId]
     }
 
-    fun hasKit(player: Player?): Boolean {
-        return getKit(player) != "none"
+    fun hasKit(player: Player): Boolean {
+        return kitMap.containsKey(player.uniqueId)
     }
 
     fun resetKit(player: Player) {
-        kit.remove(player.uniqueId)
+        kitMap.remove(player.uniqueId)
     }
 
-    fun setKit(player: Player, name: String?) {
-        if (hasKit(player)) {
-            resetKit(player)
+    fun setKit(player: Player, kit: BaseKit?) {
+        if (kit == null) {
+            kitMap.remove(player.uniqueId)
+        } else {
+            kitMap[player.uniqueId] = kit
         }
-        kit[player.uniqueId] = name
     }
 
     fun getStreak(player: Player?): Int {

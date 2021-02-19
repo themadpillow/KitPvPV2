@@ -1,25 +1,15 @@
 package mb.mizinkobusters.kitpvp.kit
 
-import mb.mizinkobusters.kitpvp.utils.KitPvPUtils
 import org.bukkit.attribute.Attribute
-import org.bukkit.event.EventHandler
-import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerRespawnEvent
+import org.bukkit.event.entity.PlayerDeathEvent
 
-class HealthBoost : Listener {
-    @EventHandler
-    fun onKill(event: PlayerRespawnEvent) {
-        val player = event.player
-        if (player.killer == null) {
-            return
-        }
-        val killer = player.killer
-        if (!KitPvPUtils.isInWorld(killer)) {
-            return
-        }
-        if (KitPvPUtils.getKit(killer) != "HealthBoost") {
-            return
-        }
+object HealthBoost : BaseKit {
+    override val isHealOnKill = false
+
+    override fun onKill(event: PlayerDeathEvent) {
+        super.onKill(event)
+
+        val killer = event.entity.killer
         killer!!.sendMessage("§cこのKitではキル時に金のリンゴを獲得できません")
         killer.health = killer.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value
         if (killer.getAttribute(Attribute.GENERIC_MAX_HEALTH)!!.value < 26.0) {
