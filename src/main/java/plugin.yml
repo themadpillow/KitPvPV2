@@ -3,4 +3,4 @@ name: KitPvPV2
 version: 1.0.0
 author: Mizinkobusters
 
-depend: [InventoryUI]
+depend: [ InventoryUI ]
