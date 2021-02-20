@@ -1,5 +1,6 @@
 package mb.mizinkobusters.kitpvp.other
 
+import mb.mizinkobusters.kitpvp.Main.Companion.PREFIX
 import mb.mizinkobusters.kitpvp.utils.KitPvPUtils
 import org.bukkit.Location
 import org.bukkit.event.EventHandler
@@ -10,20 +11,14 @@ import org.bukkit.event.player.PlayerTeleportEvent
 import org.bukkit.potion.PotionEffect
 import org.bukkit.potion.PotionEffectType
 
-class FieldSender : Listener {
-    private val prefix = "§f[§dKitPvP§f] "
-
+object FieldSender : Listener {
     @EventHandler
     fun onStepPlate(event: PlayerInteractEvent) {
         val player = event.player
-        if (!KitPvPUtils.isInWorld(player)) {
-            return
-        }
-        if (event.action != Action.PHYSICAL) {
-            return
-        }
+        if (!KitPvPUtils.isInWorld(player)) return
+        if (event.action != Action.PHYSICAL) return
         if (!KitPvPUtils.hasKit(player)) {
-            player.sendMessage("$prefix§cKitを選択してください")
+            player.sendMessage("$PREFIX§cKitを選択してください")
             return
         }
         val loc = event.clickedBlock!!.location

@@ -8,31 +8,23 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerMoveEvent
 
-class VoidWalkingListener : Listener {
-    private val prefix = "§f[§dKitPvP§f] "
-
+object VoidWalkingListener : Listener {
     @EventHandler
     fun onWalk(event: PlayerMoveEvent) {
         val player = event.player
-        if (KitPvPUtils.isInWorld(player)) {
-            return
-        }
-        if (!KitPvPUtils.hasKit(player)) {
-            return
-        }
+        if (KitPvPUtils.isInWorld(player)) return
+        if (!KitPvPUtils.hasKit(player)) return
+
         val from = event.from.block
         val to = event.to!!.block
-        if (from.location.distance(to.location) < 1) {
-            return
-        }
+        if (from.location.distance(to.location) < 1) return
+
         val x = event.to!!.blockX
         val y = event.to!!.blockY - 1
         val z = event.to!!.blockZ
         val block = Bukkit.getWorld(player.world.name)!!
             .getBlockAt(Location(player.world, x.toDouble(), y.toDouble(), z.toDouble()))
-        if (block.type != Material.STAINED_GLASS) {
-            return
-        }
+        if (block.type != Material.STAINED_GLASS) return
         if (player.lastDamageCause != null
             && player.lastDamageCause!!.entity != null
         ) {

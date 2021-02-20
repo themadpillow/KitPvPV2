@@ -47,4 +47,8 @@ interface BaseKit {
 
     fun onPassive(player: Player) {
     }
+
+    override fun toString(): String {
+        return kitName
+    }
 }
